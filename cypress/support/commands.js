@@ -1,4 +1,5 @@
 Cypress.Commands.add("login", (email, password) => {
+  cy.visit("minha-conta");
   cy.get("#username").type(email);
   cy.get("#password").type(password, { log: false });
   cy.get(".woocommerce-form > .button").click();
