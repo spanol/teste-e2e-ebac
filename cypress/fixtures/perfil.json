@@ -1,4 +1,12 @@
 {
-  "usuario": "aluno_ebac@teste.com",
-  "senha": "teste@teste.com"
+  "email": "usuariosupermisterioso@teste.com",
+  "usuario": "usuariosupermisterioso",
+  "senha": "senha1234@4321",
+  "company": "Super Misterioso Ltda",
+  "address1": "Rua Misteriosa, 123",
+  "address2": "Apto 456",
+  "city": "Cidade Misteriosa",
+  "postcode": "12345-678",
+  "phone": "(11) 98765-4321",
+  "comments": "Por favor, entregar após as 18h."
 }

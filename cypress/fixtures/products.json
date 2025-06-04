@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Helena Hooded Fleece",
+    "size": "XL",
+    "color": "Yellow",
+    "quantity": 1
+  },
+  {
+    "name": "Josie Yoga Jacket",
+    "size": "S",
+    "color": "Blue",
+    "quantity": 1
+  },
+  {
+    "name": "Ingrid Running Jacket",
+    "size": "XL",
+    "color": "Orange",
+    "quantity": 1
+  },
+  {
+    "name": "Stellar Solar Jacket",
+    "size": "L",
+    "color": "Red",
+    "quantity": 1
+  }
+]

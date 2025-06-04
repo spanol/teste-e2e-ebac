@@ -1,38 +1,55 @@
-/// <reference types="cypress" />
-let dadosLogin
+const perfil = require("../fixtures/perfil.json");
+let dadosLogin;
 
-context('Funcionalidade Login', () => {
-    before(() => {
-        cy.fixture('perfil').then(perfil => {
-            dadosLogin = perfil
-        })
-    });
+context("Funcionalidade Login", () => {
+  before(() => {
+    dadosLogin = perfil;
+  });
 
-    beforeEach(() => {
-        cy.visit('minha-conta')
-    });
+  beforeEach(() => {
+    cy.visit("minha-conta");
+  });
 
-    afterEach(() => {
-        cy.screenshot()
-    });
+  afterEach(() => {
+    cy.screenshot();
+  });
 
-    it('Login com sucesso usando Comando customizado', () => {
-        cy.login(dadosLogin.usuario, dadosLogin.senha)
-        cy.get('.page-title').should('contain', 'Minha conta')
-    });
+  it("Login com sucesso usando Comando customizado", () => {
+    cy.login(dadosLogin.usuario, dadosLogin.senha);
+    cy.get(".page-title").should("contain", "Minha conta");
+    cy.get(".woocommerce-MyAccount-content > p").should(
+      "contain",
+      `Olá, ${dadosLogin.usuario}`
+    );
+  });
 
-    it('Login usando fixture', () => {
-        cy.fixture('perfil').then((dados) => {
-            cy.login(dados.usuario, dados.senha)
-        })
-        cy.get('.page-title').should('contain', 'Minha conta')
-    });
+  it("Deve exibir mensagem de erro ao inserir usuário inválido", () => {
+    const email = "usuarioinexistente@teste.com";
+    cy.login(email, dadosLogin.senha);
+    cy.url().should("include", "/minha-conta");
+    cy.get(".woocommerce-error > li").should(
+      "contain",
+      "Endereço de e-mail desconhecido. Verifique novamente ou tente seu nome de usuário."
+    );
+  });
 
-    it.skip('Deve fazer login com sucesso - sem otimização', () => {
-        cy.get('#username').type(dadosLogin.usuario)
-        cy.get('#password').type(dadosLogin.senha, { log: false })
-        cy.get('.woocommerce-form > .button').click()
-        cy.get('.page-title').should('contain', 'Minha conta')
-        cy.get('.woocommerce-MyAccount-content > :nth-child(2)').should('contain', 'Olá, aluno_ebac')
-    })
-})
+  it("Deve exibir mensagem de erro ao inserir senha inválida", () => {
+    const email = dadosLogin.email;
+    const password = "senhaerrada";
+    cy.login(email, password);
+    cy.url().should("include", "/minha-conta");
+    cy.get(".woocommerce-error > li").should(
+      "contain",
+      `A senha fornecida para o e-mail ${email} está incorreta.`
+    );
+  });
+
+  it.skip("Deve fazer login com sucesso - sem otimização", () => {
+    cy.login(dadosLogin.email, dadosLogin.senha);
+    cy.get(".page-title").should("contain", "Minha conta");
+    cy.get(".woocommerce-MyAccount-content > :nth-child(2)").should(
+      "contain",
+      `Olá, ${dadosLogin.usuario}`
+    );
+  });
+});
