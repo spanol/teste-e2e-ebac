@@ -12,7 +12,7 @@ context("Exercicio - Testes End-to-end - Fluxo de pedido", () => {
       Preenchendo todas opções no checkout
       E validando minha compra ao final */
   beforeEach(() => {
-    cy.login(perfil.usuario, perfil.senha);
+    cy.login(perfil.email, perfil.senha);
     productsPage.visit();
   });
 
