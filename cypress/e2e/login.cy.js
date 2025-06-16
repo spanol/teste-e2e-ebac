@@ -15,7 +15,7 @@ context("Funcionalidade Login", () => {
   });
 
   it("Login com sucesso usando Comando customizado", () => {
-    cy.login(dadosLogin.usuario, dadosLogin.senha);
+    cy.login(dadosLogin.email, dadosLogin.senha);
     cy.get(".page-title").should("contain", "Minha conta");
     cy.get(".woocommerce-MyAccount-content > p").should(
       "contain",
@@ -41,15 +41,6 @@ context("Funcionalidade Login", () => {
     cy.get(".woocommerce-error > li").should(
       "contain",
       `A senha fornecida para o e-mail ${email} está incorreta.`
-    );
-  });
-
-  it.skip("Deve fazer login com sucesso - sem otimização", () => {
-    cy.login(dadosLogin.email, dadosLogin.senha);
-    cy.get(".page-title").should("contain", "Minha conta");
-    cy.get(".woocommerce-MyAccount-content > :nth-child(2)").should(
-      "contain",
-      `Olá, ${dadosLogin.usuario}`
     );
   });
 });
